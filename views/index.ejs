@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/public/styles.css"/>
+    <meta charset="UTF-8" />
+    <title>Note Journal App</title>
+  </head>
+
+  <body>
+
+  <section data-position="add-quote">
+    <h1>Note Journal &lt;3 </h1>
+
+    <form action="/messages" method="POST">
+        <input type="text" placeholder="Name" name="name">
+        <!-- <input type="text" placeholder="date (M/D/Y)" name="date"> -->
+        <br><br>
+        <textarea id="textbox" name="message" rows="16" cols="50">
+        </textarea>
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+    <h2> Message </h2>
+
+
+    <section data-position="quotes">
+    <ul class="notes">
+      <!-- Gets current date -->
+      <%let today = new Date()%>
+      <%let dd = String(today.getDate()).padStart(2, '0')%>
+      <%let mm = String(today.getMonth() + 1).padStart(2, '0')%>
+      <%let yyyy = today.getFullYear()%>
+      <%today = mm + '/' + dd + '/' + yyyy;%>
+
+      <!-- Gets day of the week for reference in if statement -->
+      <%const d = new Date()%>
+      <%let currentDay = d.getDay()%>
+
+      <% if(currentDay !== 1) {%>
+        <style> li.note { display: none;}</style>
+        <% } %>
+
+      <% for(var i = 0; i < notes.length; i++) {%>
+        <li class="note">
+          <span><%= today %></span> - 
+          <span><%= notes[i].name %></span>:
+          <span><%= notes[i].message %></span>
+        </li>
+        <% } %>
+    </ul>
+    </section>
+
+  </body>
+</html>
